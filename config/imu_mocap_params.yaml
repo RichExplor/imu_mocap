@@ -1,0 +1,49 @@
+# =============================================================================
+# imu_mocap 工程统一参数配置文件
+#
+# 由 launch 文件加载并下发给各节点。所有可配置参数集中在此管理，
+# 修改参数无需重新编译代码。
+#
+# 加载方式:
+#   ros2 launch imu_mocap imu_mocap.launch.py
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# MocapImuCalibration 标定节点
+# 订阅原始 JSON 字符串数据，解析并发布 ImuDataArray
+# -----------------------------------------------------------------------------
+mocap_imu_calibration_node:
+  ros__parameters:
+    # 输入话题：原始 IMU JSON 字符串 (std_msgs/String)
+    imu_raw_topic: "/imu20/raw"
+    # 输出话题：标定后的 IMU 数据数组
+    calibrated_topic: "/mocap_imu/calibrated"
+    # 最大支持的 IMU 数量
+    max_imu_count: 20
+    # 默认 frame_id（当原始数据未提供时使用）
+    default_frame_id: "imu20"
+    # IMU 名称前缀
+    imu_name_prefix: "imu"
+    # IMU 名称数字补零宽度（imu01, imu02, ...）
+    imu_name_width: 2
+
+# -----------------------------------------------------------------------------
+# AhrsOrientation 姿态解算节点
+# 订阅 ImuDataArray，使用 Madgwick 滤波器解算姿态并发布 ImuOrientationArray
+# -----------------------------------------------------------------------------
+ahrs_orientation_node:
+  ros__parameters:
+    # 输入话题：标定后的 IMU 数据数组
+    calibrated_topic: "/mocap_imu/calibrated"
+    # 输出话题：姿态解算结果数组
+    orientation_topic: "/mocap_imu/orientation"
+    # 最大支持的 IMU 数量
+    max_imu_count: 20
+    # Madgwick 滤波器增益 beta（陀螺仪测量误差，典型范围 0.01~0.5）
+    beta: 0.16
+    # 磁力计修正权重
+    mag_weight: 1.0
+    # 默认时间间隔 (s)，首次或异常时使用
+    default_dt: 0.01
+    # 最大允许时间间隔 (s)，超过则使用 default_dt 防止跳变
+    max_dt: 0.1

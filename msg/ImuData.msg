@@ -1,0 +1,9 @@
+# 单个IMU数据消息
+builtin_interfaces/Time stamp
+string frame_id
+string imu_name
+geometry_msgs/Vector3 acc
+geometry_msgs/Vector3 gyro
+geometry_msgs/Vector3 magn
+bool valid
+string invalid_reason
