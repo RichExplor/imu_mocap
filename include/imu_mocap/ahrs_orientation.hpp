@@ -9,6 +9,9 @@
 #include <string>
 #include <vector>
 
+namespace HanWei {
+namespace Mocap {
+
 /**
  * @brief Madgwick AHRS 滤波器
  *
@@ -117,3 +120,6 @@ private:
   rclcpp::Subscription<imu_mocap::msg::ImuDataArray>::SharedPtr     imu_sub_;
   rclcpp::Publisher<imu_mocap::msg::ImuOrientationArray>::SharedPtr orientation_pub_;
 };
+
+} // namespace Mocap
+} // namespace HanWei

@@ -3,6 +3,9 @@
 #include <string>
 #include <vector>
 
+namespace HanWei {
+namespace Mocap {
+
 SimpleJsonParser::SimpleJsonParser(const std::string& json_str) : json_(json_str) {
 }
 
@@ -222,3 +225,6 @@ std::string SimpleJsonParser::extractArray(const std::string& key) {
 
   return json_.substr(start, end - start);
 }
+
+} // namespace Mocap
+} // namespace HanWei

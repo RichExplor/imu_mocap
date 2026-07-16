@@ -2,9 +2,12 @@
 
 #include <algorithm>
 
-// ============================================================================
-// MadgwickFilter 实现
-// ============================================================================
+constexpr double Deg2Rad = M_PI / 180.0;
+constexpr double Rad2Deg = 180.0 / M_PI;
+
+namespace HanWei {
+namespace Mocap {
+
 MadgwickFilter::MadgwickFilter(double beta, double mag_weight)
     : beta_(beta), mag_weight_(mag_weight), q_(1.0, 0.0, 0.0, 0.0), initialized_(false) {
 }
@@ -237,7 +240,7 @@ void AhrsOrientationNode::imuArrayCallback(const imu_mocap::msg::ImuDataArray::S
 
       // 获取 IMU 数据
       Eigen::Vector3d acc(Eigen::Vector3d(imu.acc.x, imu.acc.y, imu.acc.z));
-      Eigen::Vector3d gyro(Eigen::Vector3d(imu.gyro.x, imu.gyro.y, imu.gyro.z));
+      Eigen::Vector3d gyro(Eigen::Vector3d(imu.gyro.x, imu.gyro.y, imu.gyro.z) * Deg2Rad);
       Eigen::Vector3d mag(Eigen::Vector3d(imu.magn.x, imu.magn.y, imu.magn.z));
 
       // 计算时间间隔
@@ -312,3 +315,6 @@ Eigen::Vector3d AhrsOrientationNode::quaternionToEuler(const geometry_msgs::msg:
 
   return Eigen::Vector3d(roll, pitch, yaw);
 }
+
+} // namespace Mocap
+} // namespace HanWei

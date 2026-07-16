@@ -3,6 +3,9 @@
 #include <string>
 #include <vector>
 
+namespace HanWei {
+namespace Mocap {
+
 /**
  * @brief 简单的 JSON 解析器，支持从 JSON 字符串中提取字段
  *
@@ -49,3 +52,6 @@ private:
    */
   std::string extractArray(const std::string& key);
 };
+
+} // namespace Mocap
+} // namespace HanWei

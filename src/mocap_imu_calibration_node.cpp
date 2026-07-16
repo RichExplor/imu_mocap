@@ -2,7 +2,7 @@
 
 int main(int argc, char** argv) {
   rclcpp::init(argc, argv);
-  rclcpp::spin(std::make_shared<MocapImuCalibration>());
+  rclcpp::spin(std::make_shared<HanWei::Mocap::MocapImuCalibration>());
   rclcpp::shutdown();
   return 0;
 }

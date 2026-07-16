@@ -156,7 +156,7 @@ struct TestResult {
 TestResult runSimulation(const TestConfig& cfg) {
   std::mt19937 rng(42);  // 固定种子，保证可复现
 
-  MadgwickFilter filter(cfg.beta, cfg.mag_weight);
+  HanWei::Mocap::MadgwickFilter filter(cfg.beta, cfg.mag_weight);
 
   int    steps    = static_cast<int>(cfg.duration_s / cfg.dt);
   double sum_q2   = 0.0;

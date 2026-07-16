@@ -4,6 +4,9 @@
 #include <iomanip>
 #include <sstream>
 
+namespace HanWei {
+namespace Mocap {
+
 MocapImuCalibration::MocapImuCalibration() : Node("mocap_imu_calibration_node") {
   // 声明并读取可配置参数
   imu_raw_topic_    = this->declare_parameter<std::string>("imu_raw_topic", "/imu20/raw");
@@ -130,3 +133,6 @@ void MocapImuCalibration::imuRawCallback(const std_msgs::msg::String::SharedPtr 
     RCLCPP_ERROR(this->get_logger(), "Error processing IMU data: %s", e.what());
   }
 }
+
+} // namespace Mocap
+} // namespace HanWei

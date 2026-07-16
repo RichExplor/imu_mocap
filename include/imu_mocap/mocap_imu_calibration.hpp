@@ -9,6 +9,9 @@
 #include <string>
 #include <vector>
 
+namespace HanWei {
+namespace Mocap {
+
 /**
  * @brief IMU 动捕标定节点
  *
@@ -41,3 +44,6 @@ private:
   rclcpp::Subscription<std_msgs::msg::String>::SharedPtr     imu_raw_sub_;
   rclcpp::Publisher<imu_mocap::msg::ImuDataArray>::SharedPtr imu_array_pub_;
 };
+
+} // namespace Mocap
+} // namespace HanWei
